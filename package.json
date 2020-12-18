@@ -1,0 +1,22 @@
+{
+  "name": "mackogneur",
+  "version": "1.0.0",
+  "description": "Discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Saibe1111/Mackogneur.git"
+  },
+  "author": "Sébastien CUVELLIER",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Saibe1111/Mackogneur/issues"
+  },
+  "homepage": "https://github.com/Saibe1111/Mackogneur#readme",
+  "dependencies": {
+    "discord.js": "^12.5.1"
+  }
+}
