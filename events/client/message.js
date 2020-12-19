@@ -50,6 +50,8 @@ module.exports = (client, message) => {
 
     });
 
+    db.closeDatabase();
+
 }
 
 const errorMessage = (command, message) => {

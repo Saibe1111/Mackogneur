@@ -21,10 +21,14 @@ $ node index.js
 ## 📝 Commands
 ### ⚠ Note
 > The default prefix is ':'  
-> {arg} for the necessary arguments  
-> (arg) for optional arguments
+> <arg> for the necessary arguments  
+> {arg} for optional arguments
 
 ### All users
+
+* Get information about commands
+     * `:help <@Pokemon>`
+     * `:h <@Pokemon>`
 
 * Get information about a user
      * `:userinfo {ID or @}`
