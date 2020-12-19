@@ -17,8 +17,10 @@
   },
   "homepage": "https://github.com/Saibe1111/Mackogneur#readme",
   "dependencies": {
+    "cpu-stat": "^2.0.1",
     "discord.js": "^12.5.1",
     "moment": "^2.29.1",
+    "os": "^0.1.1",
     "sqlite3": "^5.0.0"
   }
 }
