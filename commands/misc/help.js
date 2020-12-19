@@ -30,7 +30,7 @@ module.exports.run = (client, message, args) => {
                 );
             } else {
                 helpEmbed.addField(
-                    `${PREFIX}${cmd.help.name} <${cmd.help.usage}>`,
+                    `${PREFIX}${cmd.help.name} {${cmd.help.usage}}`,
                     `${cmd.help.description}`, false
                 );
             }
@@ -52,7 +52,7 @@ module.exports.run = (client, message, args) => {
                 );
             } else {
                 helpAdminEmbed.addField(
-                    `${PREFIX}${cmd.help.name} <${cmd.help.usage}>`,
+                    `${PREFIX}${cmd.help.name} {${cmd.help.usage}}`,
                     `${cmd.help.description}`, false
                 );
             }
