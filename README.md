@@ -1,6 +1,8 @@
 # Mackogneur
-## ℹ️ About us
 
+## ℹ️ About us
+Mackogneur is a Discord bot.  
+Developed by Saibe1111 for a French Discord server '[LA FAMILIA](https://discord.com/invite/wV8JeNSEFZ)'.
 
 ## 🚀 Installation
 ```shell
