@@ -1,5 +1,5 @@
 # Mackogneur
-## About us
+## ℹ️ About us
 
 
 ## 🚀 Installation
@@ -19,8 +19,19 @@ $ node index.js
 ```
 
 ## 📝 Commands
+### ⚠ Note
+> The default prefix is ':'  
+> {arg} for the necessary arguments  
+> (arg) for optional arguments
 
+### All users
 
+* Get information about a user
+     * `:userinfo {ID or @}`
+     * `:useri {ID or @}`
+     * `:ui{ID or @}`
+
+### Admins
 
 ## 🧾 Others features
 
