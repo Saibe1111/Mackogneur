@@ -63,7 +63,7 @@ module.exports.run = (client, message, args) => {
 
     const db = new Database();
     let isAdmin = false;
-    db.getAdmins().then((ids) => {
+    db.getRoles('Admin').then((ids) => {
 
         ids.forEach(id => {
             if (message.member.roles.cache.has(id)) {

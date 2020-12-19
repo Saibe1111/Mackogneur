@@ -19,10 +19,10 @@ class Database {
       this.database.close();
     }
 
-    getAdmins(){
+    getRoles(role){
         return new Promise((resolve, reject) => {
             let result = []
-            this.database.each(`SELECT * FROM Roles WHERE Admin=1;`, (err, row) => {
+            this.database.each(`SELECT * FROM Roles WHERE "${role}"=1;`, (err, row) => {
               if(err) { reject(err) }
               result.push(row.ID)
             }, () => {
@@ -42,6 +42,8 @@ class Database {
             })
         });
     }
+
+  
 
 }
 

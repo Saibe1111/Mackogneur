@@ -41,6 +41,9 @@ $ node index.js
 * Get information about the bot
      * `:ping {@Pokemon}`
      * `:p {@Pokemon}`
+* Closes the server channels
+     * `:channelslock {on/off}`
+     * `:chl {on/off}`
 
 ## 🧾 Others features
 
@@ -50,9 +53,12 @@ $ node index.js
 
 The list of project dependencies:
 
+* cpu-stat
 * discord.js
-* sqlite3
 * moment
+* os
+* sqlite3
+
 
 ## 📕 License
 
