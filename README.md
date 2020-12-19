@@ -47,7 +47,7 @@ $ node index.js
 
 ## 🧾 Others features
 
-
+* Log message at bot connection
 
 ## 🤝 Dependencies
 
