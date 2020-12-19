@@ -36,6 +36,9 @@ $ node index.js
      * `:ui (ID or @)`
 
 ### Admins
+* Get information about the bot
+     * `:ping {@Pokemon}`
+     * `:p {@Pokemon}`
 
 ## 🧾 Others features
 
@@ -45,11 +48,9 @@ $ node index.js
 
 The list of project dependencies:
 
-* cpu-stat
 * discord.js
-* moment
-* os
 * sqlite3
+* moment
 
 ## 📕 License
 

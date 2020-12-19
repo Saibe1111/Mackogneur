@@ -58,10 +58,11 @@ const errorMessage = (command, message) => {
     const messageError = new MessageEmbed()
         .setColor('RED')
         .setTitle(":x: Commande")
-        .setDescription(`Merci d'utiliser la commande correctement:\n${PREFIX} ${command.help.name} {${command.help.usage}}`);
+        .setDescription(`**${message.member.displayName}**,\nMerci d'utiliser la commande correctement:\n**${PREFIX} ${command.help.name} {${command.help.usage}}**`);
     message.channel.send(messageError).then( msg =>{
         msg.delete({ timeout: 30000 }); 
     });
+    message.delete();
 }
 
 
@@ -70,10 +71,11 @@ const adminCommands = (command, message, isAdmin) => {
         const messagePing = new MessageEmbed()
             .setColor('RED')
             .setTitle(":x: Commande")
-            .setDescription(`Vous n'avez pas accès à cette commande.`);
+            .setDescription(`**${message.member.displayName}**,\nVous n'avez pas accès à cette commande.`);
         message.channel.send(messagePing).then( msg => {
             msg.delete({ timeout: 30000 }); 
         });
+        message.delete();
         return true;
     }
     return false;
