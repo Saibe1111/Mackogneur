@@ -45,9 +45,11 @@ $ node index.js
 
 The list of project dependencies:
 
+* cpu-stat
 * discord.js
-* sqlite3
 * moment
+* os
+* sqlite3
 
 ## 📕 License
 
