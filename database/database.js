@@ -15,6 +15,10 @@ class Database {
           });
     }
 
+    closeDatabase(){
+      this.database.close();
+    }
+
     getAdmins(){
         return new Promise((resolve, reject) => {
             let result = []
