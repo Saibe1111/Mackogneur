@@ -1,9 +1,12 @@
 const Database = require("../../database/database.js");
 const { PREFIX } = require("../../config.json");
 const { MessageEmbed } = require('discord.js');
+const Ping = require('./utils/ping.js')
 
 
 module.exports = (client, message) => {
+
+    Ping.run(message, client);
     
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 

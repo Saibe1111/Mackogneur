@@ -43,7 +43,29 @@ class Database {
         });
     }
 
-  
+    getUserWhoPing(){
+        return new Promise((resolve, reject) => {
+          let result = []
+          this.database.each(`SELECT * FROM UserWhoPing;`, (err, row) => {
+            if(err) { reject(err) }
+            result.push(row)
+          }, () => {
+            resolve(result)
+          })
+        });
+    }
+
+    getPingUser(userWhoPing){
+      return new Promise((resolve, reject) => {
+        let result = []
+        this.database.each(`SELECT pu.ID, pu.Cooldown FROM PingUser pu JOIN PingFor pf ON pu.ID = pf.ID_User WHERE pf.ID_UserWhoPing="${userWhoPing}"`, (err, row) => {
+          if(err) { reject(err) }
+          result.push(row)
+        }, () => {
+          resolve(result);
+        })
+      });
+  }
 
 }
 
