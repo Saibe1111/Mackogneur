@@ -2,11 +2,13 @@ const Database = require("../../database/database.js");
 const { PREFIX } = require("../../config.json");
 const { MessageEmbed } = require('discord.js');
 const Ping = require('./utils/ping.js')
+const checkQuestion = require('./utils/checkQuestion.js')
 
 
 module.exports = (client, message) => {
 
     Ping.run(message, client);
+    checkQuestion.run(message, client);
     
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
 
@@ -16,8 +18,8 @@ module.exports = (client, message) => {
     const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.help.aliases && cmd.help.aliases.includes(commandName));
     if (!command) return;
 
-    
     const db = new Database();
+    
     let isAdmin = false;
     db.getRoles('Admin').then((ids) => {
 
