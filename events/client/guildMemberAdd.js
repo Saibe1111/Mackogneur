@@ -11,7 +11,7 @@ module.exports = (client, member) => {
             let join = member.guild.roles.cache.get(idRole);
             member.roles.add(join);
             sendQuestion.run(member);
-
+            
         });
     });
 

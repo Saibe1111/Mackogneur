@@ -9,8 +9,10 @@ module.exports = (client, message) => {
 
     Ping.run(message, client);
     checkQuestion.run(message, client);
-    
+
     if (!message.content.startsWith(PREFIX) || message.author.bot) return;
+
+    if(message.channel.type === "dm") return;
 
     const args = message.content.slice(PREFIX.length).split(/ +/);
     const commandName = args.shift().toLowerCase();
@@ -19,7 +21,7 @@ module.exports = (client, message) => {
     if (!command) return;
 
     const db = new Database();
-    
+
     let isAdmin = false;
     db.getRoles('Admin').then((ids) => {
 
@@ -42,16 +44,16 @@ module.exports = (client, message) => {
                 errorMessage(command, message);
                 return;
             }
-        
+
             if (command.help.botIdArg && !(args[0] === `<@!${client.user.id}>` || args[0] === `<@${client.user.id}>` || args[0].toLowerCase() === client.user.username.toLowerCase())) {
                 return;
             }
-        
+
             command.run(client, message, args);
 
         });
-       
-        
+
+
 
     });
 
@@ -65,7 +67,7 @@ const errorMessage = (command, message) => {
         .setTitle(":x: Commande")
         .setDescription(`**${message.member.displayName}**,\nMerci d'utiliser la commande correctement:\n**${PREFIX} ${command.help.name} {${command.help.usage}}**`);
     message.channel.send(messageError).then( msg =>{
-        msg.delete({ timeout: 30000 }); 
+        msg.delete({ timeout: 30000 });
     });
     message.delete();
 }
@@ -78,7 +80,7 @@ const adminCommands = (command, message, isAdmin) => {
             .setTitle(":x: Commande")
             .setDescription(`**${message.member.displayName}**,\nVous n'avez pas accès à cette commande.`);
         message.channel.send(messagePing).then( msg => {
-            msg.delete({ timeout: 30000 }); 
+            msg.delete({ timeout: 30000 });
         });
         message.delete();
         return true;

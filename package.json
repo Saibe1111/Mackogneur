@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Saibe1111/Mackogneur#readme",
   "dependencies": {
+    "canvas": "^2.6.1",
     "cpu-stat": "^2.0.1",
     "discord.js": "^12.5.1",
     "moment": "^2.29.1",

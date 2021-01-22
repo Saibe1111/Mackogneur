@@ -23,6 +23,28 @@ module.exports.run = (member) =>{
     
 }
 
+module.exports.newSend = (message) =>{
+
+    const db = new Database();
+
+    db.getNumberQuestions().then((nb) => {
+        let random = Math.floor(Math.random() * nb) + 1;
+
+        db.userExist(message.author.id).then((exist) => {
+            if(exist){
+                db.getUserNumberTry(message.author.id).then((nbTry) => {
+                    db.updateUserQuestion(message.author.id, random, nbTry + 1);
+                    send(db,message.author);
+                });
+            }else{
+                db.addUserQuestion(message.author.displayName, message.author.id, random);
+                send(db,message.author);
+            }
+        });
+    });
+    
+}
+
 function send(db, member){
     db.getQuestion(member.id).then((question) => {
         let answers = question.Answers.split(',');
