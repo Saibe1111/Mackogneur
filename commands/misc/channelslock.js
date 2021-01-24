@@ -4,7 +4,7 @@ const Database = require("../../database/database.js");
 
 module.exports.help = {
     name: 'channelslock',
-    description: 'Permet de lock tout les salon le serveur.',
+    description: 'Permet de lock tout les salons du serveur.',
     usage: 'on/off',
     args: true,
     aliases: ["chl"],

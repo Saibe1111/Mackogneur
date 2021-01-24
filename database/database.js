@@ -1,4 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
+const moment = require('moment');
+
 
 class Database {
 
@@ -96,7 +98,7 @@ class Database {
     }
 
     addUserQuestion(username, id, question){
-      this.database.run(`INSERT INTO UserQuestion VALUES("${username}", "${id}", ${question}, 1);`);
+      this.database.run(`INSERT INTO UserQuestion VALUES("${username}", "${id}", ${question}, 1, "${moment(new Date()).format('DD/MM/YY HH:mm')}");`);
     }
 
     removeUserQuestion(id){
@@ -112,6 +114,15 @@ class Database {
         this.database.get(`SELECT NumberOfQuestion FROM UserQuestion WHERE UserID="${id}";`, (err, row) => {
           if(err) { reject(err) }
           resolve(row['NumberOfQuestion']);
+        });
+      });
+    }
+
+    getUserJoinDate(id){
+      return new Promise((resolve, reject) => {
+        this.database.get(`SELECT JoinDate FROM UserQuestion WHERE UserID="${id}";`, (err, row) => {
+          if(err) { reject(err) }
+          resolve(row['JoinDate']);
         });
       });
     }

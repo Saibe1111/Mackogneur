@@ -1,6 +1,8 @@
 const Database = require("../../../database/database.js");
-const sendQuestion = require('./sendQuestion.js');
 const {MessageEmbed} = require('discord.js');
+const messageWelcome = require('./messageWelcome.js');
+const sendQuestion = require('./sendQuestion.js');
+const moment = require('moment');
 
 module.exports.run = (message, client) => {
 
@@ -51,6 +53,7 @@ module.exports.run = (message, client) => {
                             message.reply('Bonne réponse ! Tu viens d\'obtenir ton rôle sur le serveur !');
                             idsChannel.forEach(idChannel => {
                                 logMessage(client, message, idChannel,db);
+                                messageWelcome.message(client,message);
                             });
                         });
                     }else if (message.content !== ""){
@@ -68,20 +71,23 @@ module.exports.run = (message, client) => {
 }
 
 function logMessage(client, message, idChannel, db){
-  let nbr = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
-
-  db.getUserNumberTry(message.author.id).then((nbTry) => {
-    const messageJoin = new MessageEmbed()
-        .setAuthor(`${message.author.username}`, message.author.displayAvatarURL())
-        .setColor('GREEN')
-        .setFooter(`ID: ${message.author.id}`)
-        .addFields(
-            { name: 'A validé en :', value: `${nbTry} essai(s)`, inline: true},
-        )
-        .setDescription(`\nNous sommes maintenant : **${nbr}**`);
-    client.channels.cache.get(idChannel).send(messageJoin);
-  });
-
+    let nbr = client.guilds.cache.reduce((a, g) => a + g.memberCount, 0);
+    db.getUserJoinDate(message.author.id).then((joinDate) => {
+        db.getUserNumberTry(message.author.id).then((nbTry) => {
+            const messageJoin = new MessageEmbed()
+                .setAuthor(`${message.author.username}`, message.author.displayAvatarURL())
+                .setColor('GREEN')
+                .setFooter(`ID: ${message.author.id}`)
+                .addFields(
+                    { name: 'A rejoint le :', value: `${joinDate}`, inline: true },
+                    { name: 'A validé le :', value: `${moment(new Date()).format('DD/MM/YY HH:mm')}`, inline: true},
+                    { name: 'A validé en :', value: `${nbTry} essai(s)`, inline: true}
+                    
+                )
+                .setDescription(`\nNous sommes maintenant : **${nbr}**`);
+            client.channels.cache.get(idChannel).send(messageJoin);
+        });
+    });
 }
 
 function nextChar(c) {

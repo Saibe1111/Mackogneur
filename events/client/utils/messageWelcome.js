@@ -1,15 +1,20 @@
 const Canvas = require('canvas');
-const {MessageAttachment, MessageEmbed} = require('discord.js');
+const {MessageAttachment} = require('discord.js');
+const Database = require("../../../database/database.js");
 
 module.exports = {
-    message: async function (client, member) {
+    message: async function (client, message) {
+
+        const db = new Database();
+
+
         Canvas.registerFont('./assets/font/LondrinaShadow-Regular.ttf', { family: 'Londrina' })
         Canvas.registerFont('./assets/font/LuckiestGuy-Regular.ttf', { family: 'Luck' })
         //Génération de l'image !
         const canvas = Canvas.createCanvas(1024, 500);
         const ctx = canvas.getContext('2d');
 
-        const background = await Canvas.loadImage('./assets/img/wallpaper.jpg');
+        const background = await Canvas.loadImage('./assets/image/wallpaper.jpg');
         ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
 
@@ -23,66 +28,52 @@ module.exports = {
         ctx.font = '33.7pt "Luck"'
         ctx.textAlign = "center";
         ctx.fillStyle = '#000000';
-        ctx.fillText(`${member.displayName}`, 620, 250);
+        ctx.fillText(`${message.author.username}`, 620, 250);
 
         ctx.beginPath();
         ctx.arc(230, 250, 100, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.clip();
 
-        const avatar = await Canvas.loadImage(member.user.displayAvatarURL({ format: 'jpg' }));
+        const avatar = await Canvas.loadImage(message.author.displayAvatarURL({ format: 'jpg' }));
         ctx.drawImage(avatar, 130, 150, 200, 200);
 
         const attachment  = new MessageAttachment(canvas.toBuffer(), 'welcome-image.png');
-
 
         let generalID;
         let announcementsID;
         let rulesID;
         let infosID;
-        for (i in jsonC.CHANNELS) {
-            //channels permissions
-            for (j in jsonC.CHANNELS[i].PERMISSION) {
-    
-                if (jsonC.CHANNELS[i].PERMISSION[j] == 'general') {
-                    generalID = jsonC.CHANNELS[i].ID;
-                }else if(jsonC.CHANNELS[i].PERMISSION[j] == 'announcements') {
-                    announcementsID = jsonC.CHANNELS[i].ID;
-                }else if(jsonC.CHANNELS[i].PERMISSION[j] == 'infos') {
-                    infosID = jsonC.CHANNELS[i].ID;
-                }else if(jsonC.CHANNELS[i].PERMISSION[j] == 'rules') {
-                    rulesID = jsonC.CHANNELS[i].ID;
-                }
 
-            }
-        }
+        db.getChannelsWith('general').then((generalIDs) => {
+            generalIDs.forEach(generalID2 => {
+                generalID = generalID2;
+            });
+            db.getChannelsWith('announcements').then((announcementsIDs) => {
+                announcementsIDs.forEach(announcementsID2 => {
+                    announcementsID = announcementsID2;
+                });
+                db.getChannelsWith('rules').then((rulesIDs) => {
+                    rulesIDs.forEach(rulesID2 => {
+                        rulesID = rulesID2;
+                    });
+                    db.getChannelsWith('infos').then((infosIDs) => {
+                        infosIDs.forEach(infosID2 => {
+                            infosID = infosID2;
+                        });
 
-        db.getChannelsWith('join_logs').then((generalIDs) => {
-            idsChannel.forEach(generalID => {
-                
+                        let welcomeMessage = `Bienvenue à ${message.author}. Si tu aimes Bigflo et Oli, tu es au bon endroit ! \n■  Tant que tu es là, penses à bien relire les <#${rulesID}> et regarde dans <#${announcementsID}> pour voir les infos du serveur.\n■ Reste informé sur l’actualité des frères dans <#${infosID}> et viens discuter dans <#${generalID}> !`
+                        db.getChannelsWith('welcome').then((channelWelcomeIDs) => {
+                            channelWelcomeIDs.forEach(channelWelcomeID => {
+                                client.channels.cache.get(channelWelcomeID).send(welcomeMessage,attachment);
+                            });
+                        });
+
+                    });
+                });
             });
         });
         
-        //Envoie image + message
-        let welcomeMessage = `Bienvenue à ${member}. Si tu aimes Bigflo et Oli, tu es au bon endroit ! \n■  Tant que tu es là, penses à bien relire les <#${rulesID}> et regarde dans <#${announcementsID}> pour voir les infos du serveur.\n■ Reste informé sur l’actualité des frères dans <#${infosID}> et viens discuter dans <#${generalID}> !`
-        const welcomeMessageEmbed = new MessageEmbed()
-            .setTitle(`Bienvenue à ${member.displayName} !`)
-            .setColor('RANDOM')
-            .attachFiles()
-            .setDescription(welcomeMessage)
-            .setImage('attachment://welcome-image.png');
-
-        
-        for (i in jsonC.CHANNELS) {
-            //channels permissions
-            for (j in jsonC.CHANNELS[i].PERMISSION) {
-    
-                if (jsonC.CHANNELS[i].PERMISSION[j] == 'welcome_message') {
-                    client.channels.cache.get(jsonC.CHANNELS[i].ID).send(welcomeMessage,attachment);
-                }
-            }
-        }
-
       }
 
     

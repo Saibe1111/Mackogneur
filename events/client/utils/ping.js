@@ -28,7 +28,8 @@ module.exports.run = (message, client) =>{
                                     .setDescription(`'${message.content}'`)
                                     .addFields(
                                         { name: 'LE:', value: `${moment(message.createdAt).format('DD/MM/YY')}`, inline: true },
-                                        { name: 'A:', value: `${moment(message.createdAt).format('HH:mm:ss')}`, inline: true }
+                                        { name: 'A:', value: `${moment(message.createdAt).format('HH:mm:ss')}`, inline: true },
+                                        { name: 'DANS:', value: `${message.channel.name}`, inline: true }
                                     );
                                 client.users.cache.get(PingUser.ID).send(ping);
                             } catch (error) {

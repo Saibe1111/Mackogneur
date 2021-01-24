@@ -5,7 +5,7 @@ const Database = require("../../database/database.js");
 module.exports.help = {
     name: 'help',
     aliases: ["h"],
-    description: 'Affiche toute les commandes.',
+    description: 'Affiche toute les commandes du bot.',
     botIdArg: true,
     usage: 'Pokemon',
     args: true,
