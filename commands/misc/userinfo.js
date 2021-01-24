@@ -18,7 +18,7 @@ module.exports.run = (client, message, args) => {
     const status = {
         online: "En ligne",
         idle: "Inactif",
-        dnd: " Ne pas dérenger",
+        dnd: "Ne pas déranger",
         offline: " Hors-Ligne"
     }
 
