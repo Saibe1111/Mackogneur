@@ -11,7 +11,7 @@ $ npm install
 ```
 
 ## ⚙️ Configuration
-Copy or Rename to and fill out the values: __config_example.json__ __config.json__
+Copy or Rename to and fill out the values: __config_example.json__ __config.json__ AND __database_example.db__ __database.db__
 
 > For the time being it is also necessary to configure the database manually.
 
