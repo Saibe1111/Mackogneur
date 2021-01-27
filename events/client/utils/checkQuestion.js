@@ -30,7 +30,7 @@ module.exports.run = (message, client) => {
             db.removeUserQuestion(element);
 
         });
-
+        
         Verif.list = [];
     }
 
