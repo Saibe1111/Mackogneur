@@ -19,7 +19,7 @@ module.exports.run = (client, message, args) => {
         online: "En ligne",
         idle: "Inactif",
         dnd: "Ne pas déranger",
-        offline: " Hors-Ligne"
+        offline: "Hors-Ligne"
     }
 
     let today = moment(new Date());
